@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIC Insurance Agent</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --blue: #003366;
+            --yellow: #FFD700;
+            --white: #fff;
+            --light: #f5f5f5;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        nav {
+            background: var(--blue);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 8%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 51, 102, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--yellow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--yellow);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            background: linear-gradient(135deg, #003366, #004a99);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('Images/Profile Image.png') center/cover no-repeat;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 650px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.8rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-text span {
+            color: var(--yellow);
+            position: relative;
+        }
+
+        .hero-text span::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--yellow);
+            opacity: 0.3;
+            border-radius: 3px;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            margin-bottom: 35px;
+            opacity: 0.95;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--yellow);
+            color: var(--blue);
+            padding: 16px 32px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .hero-visual {
+            position: relative;
+            z-index: 2;
+            width: 420px;
+        }
+
+        .hero-visual img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 51, 102, 0.5);
+            transition: transform 0.6s ease;
+        }
+
+        .hero-visual:hover img {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        /* Floating badges */
+        .badge {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--blue);
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .badge1 { top: 25%; left: -10%; animation-delay: 0s; }
+        .badge2 { bottom: 30%; right: -5%; animation-delay: 1.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Slider */
+        .slider {
+            position: relative;
+            width: 600px;
+            max-width: 90%;
+            margin: 80px auto;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .slides {
+            display: flex;
+            width: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slides img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,51,102,0.8);
+            color: #FFD700;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 22px;
+            z-index: 10;
+            transition: background 0.3s ease;
+        }
+
+        .prev { left: 15px; }
+        .next { right: 15px; }
+
+        .prev:hover, .next:hover {
+            background: #003366;
+        }
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            color: var(--blue);
+            margin-bottom: 50px;
+            font-size: 2.6rem;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--yellow);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        /* Schemes */
+        .schemes {
+            padding: 80px 8%;
+            background: white;
+        }
+
+        .scheme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 51, 102, 0.15);
+            border-color: var(--yellow);
+        }
+
+        .card i {
+            font-size: 2.8rem;
+            color: var(--yellow);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            color: var(--blue);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* Why Us */
+        .why {
+            background: var(--blue);
+            color: white;
+            padding: 80px 8%;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .feature:hover {
+            background: rgba(255, 215, 0, 0.15);
+            transform: scale(1.05);
+        }
+
+        .feature i {
+            font-size: 2rem;
+            color: var(--yellow);
+            margin-top: 5px;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 80px 8%;
+            background: var(--light);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        form {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--yellow);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.1);
+        }
+
+        button {
+            background: var(--yellow);
+            color: var(--blue);
+            border: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            width: 100%;
+            transition: all 0.4s ease;
+        }
+
+        button:hover {
+            background: #ffed4a;
+            transform: translateY(-3px);
+        }
+
+        #form-status {
+            margin-top: 15px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--blue);
+            color: white;
+            text-align: center;
+            padding: 40px 8%;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 120px 8% 50px 8%;
+                min-height: auto;
+                gap: 50px;
+            }
+            .badge1 { left: 0; }
+            .badge2 { right: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-text h1 { font-size: 2.6rem; }
+            .hero-visual { width: 280px; }
+            nav { flex-direction: column; gap: 15px; padding: 15px; }
+            nav ul { gap: 15px; font-size: 0.95rem; }
+            .slider { width: 95%; }
+            .slides img { height: 250px; }
+            .contact-container { grid-template-columns: 1fr; }
+            .footer-content { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <i class="fas fa-shield-alt"></i>
+            LIC Agent
+        </div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Plans</a></li>
+            <li><a href="#">Schemes</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Secure Your Future With <span>LIC Insurance</span></h1>
+                <p>Protect your loved ones, grow your wealth, and enjoy complete peace of mind with India's most trusted insurance partner.</p>
+                <a href="#contact" class="btn">
+                    <i class="fas fa-handshake"></i>
+                    Get Free Consultation
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <img src="Images/Profile Image.png" alt="Insurance Agent">
+            <div class="badge badge1">
+                <i class="fas fa-trophy"></i>
+                <div>
+                    <strong>Trusted by 50L+</strong><br>
+                    <small>Families</small>
+                </div>
+            </div>
+            <div class="badge badge2">
+                <i class="fas fa-clock"></i>
+                <div>
+                    <strong>Claim Settlement</strong><br>
+                    <small>in 48 hrs</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slider">
+        <div class="slides">
+            <img src="Images/LIC 1.jpeg" alt="Financial Security">
+            <img src="Images/LIC 2.jpeg" alt="Family Protection">
+            <img src="Images/LIC 3.jpeg" alt="Wealth Creation">
+            <img src="Images/LIC 4.jpeg" alt="Financial Security">
+            <img src="Images/LIC 5.jpeg" alt="Financial Security">
+        </div>
+        <button class="prev" onclick="moveSlide(-1)">❮</button>
+        <button class="next" onclick="moveSlide(1)">❯</button>
+    </section>
+
+    <section class="schemes">
+        <h2 class="section-title">Popular LIC Schemes</h2>
+        <div class="scheme-grid">
+            <div class="card">
+                <i class="fas fa-heart"></i>
+                <h3>Jeevan Umang</h3>
+                <p>Comprehensive life cover with lifelong income benefits. Ideal for long-term family protection.</p>
+                <br>
+                <small><strong>Min. Sum Assured:</strong> ₹2 Lakh</small>
+            </div>
+            <div class="card">
+                <i class="fas fa-hand-holding-dollar"></i>
+                <h3>Jeevan Labh</h3>
+                <p>Limited premium payment with high guaranteed returns. Perfect for disciplined savers.</p>
+                <br>
+                <small><strong>Policy Term:</strong> 16/21/25 Years</small>
+            </div>
+            <div class="card">
+                <i class="fas fa-piggy-bank"></i>
+                <h3>New Endowment Plan</h3>
+                <p>Best of both worlds — savings + life insurance protection with attractive bonuses.</p>
+                <br>
+                <small><strong>Maturity Benefit:</strong> Guaranteed</small>
+            </div>
+            <div class="card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Tech Term Plan</h3>
+                <p>Pure protection at affordable premiums. Digital-first term insurance for modern families.</p>
+                <br>
+                <small><strong>Cover up to:</strong> ₹1 Crore+</small>
+            </div>
+        </div>
+    </section>
+
+    <section class="why">
+        <h2 class="section-title" style="color:white;">Why Choose Us</h2>
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-user-tie"></i>
+                <div>
+                    <h3>Personalized Advice</h3>
+                    <p>Expert guidance tailored to your unique financial goals and family needs.</p>
+                </div>
+            </div>
+            <div class="feature">
+                <i class="fas fa-bolt"></i>
+                <div>
+                    <h3>Fast Claim Support</h3>
+                    <p>Hassle-free and quick claim settlement assistance every step of the way.</p>
+                </div>
+            </div>
+            <div class="feature">
+                <i class="fas fa-sync"></i>
+                <div>
+                    <h3>Renewal &amp; Servicing</h3>
+                    <p>Timely reminders, easy renewals, and complete policy lifecycle support.</p>
+                </div>
+            </div>
+            <div class="feature">
+                <i class="fas fa-handshake"></i>
+                <div>
+                    <h3>Trusted Partnership</h3>
+                    <p>Authorized LIC advisor with years of experience serving happy customers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <!-- WORKING FORM VIA FORMSPREE -->
+            <form id="lic-contact-form" action="https://formspree.io/f/mlgydlbn" method="POST">
+                <input type="text" name="name" placeholder="Your Full Name" required>
+                <input type="tel" name="phone" placeholder="Mobile Number" required>
+                <input type="email" name="email" placeholder="Email Address">
+                <textarea rows="6" name="message" placeholder="Tell us about your insurance needs..." required></textarea>
+                <button type="submit">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+                <div id="form-status"></div>
+            </form>
+            
+            <div>
+                <h3 style="color: var(--blue); margin-bottom: 25px;">Let's Secure Your Tomorrow</h3>
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
+                    <i class="fas fa-phone" style="font-size: 1.8rem; color: var(--yellow);"></i>
+                    <div>
+                        <strong>Phone / WhatsApp</strong><br>
+                        +91 9461612637
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
+                    <i class="fas fa-envelope" style="font-size: 1.8rem; color: var(--yellow);"></i>
+                    <div>
+                        <strong>Email</strong><br>
+                        chouhangourishanker75@gmail.com
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <i class="fas fa-map-marker-alt" style="font-size: 1.8rem; color: var(--yellow);"></i>
+                    <div>
+                        <strong>Office/House</strong><br>
+                        E-27 U.I.T. Colony, Pratap Nagar, Jodhpur, Rajasthan - 342004
+                    </div>
+                </div>
+                <div style="margin-top: 40px; padding: 20px; background: rgba(0,51,102,0.05); border-radius: 12px;">
+                    <p><strong>Response Time:</strong> Usually within 2 hours</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div>© 2026 LIC Insurance Advisor • All Rights Reserved</div>
+            <div>Authorized LIC Advisor | IRDAI Certified</div>
+        </div>
+    </footer>
+
+<script>
+let currentSlide = 0;
+const slides = document.querySelector('.slides');
+const totalSlides = document.querySelectorAll('.slides img').length;
+
+function moveSlide(direction) {
+    currentSlide += direction;
+    if (currentSlide < 0) currentSlide = totalSlides - 1;
+    if (currentSlide >= totalSlides) currentSlide = 0;
+    slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+}
+
+setInterval(() => { moveSlide(1); }, 9000);
+
+// Smooth form handling logic using AJAX asynchronously
+const form = document.getElementById("lic-contact-form");
+const status = document.getElementById("form-status");
+
+form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    
+    status.innerHTML = "Sending...";
+    status.style.color = "var(--blue)";
+
+    fetch(event.target.action, {
+        method: form.method,
+        body: data,
+        headers: { 'Accept': 'application/json' }
+    }).then(response => {
+        if (response.ok) {
+            status.innerHTML = "✓ Message sent successfully! We will get back to you shortly.";
+            status.style.color = "green";
+            form.reset();
+        } else {
+            response.json().then(data => {
+                if (Object.prototype.hasOwnProperty.call(data, 'errors')) {
+                    status.innerHTML = data.errors.map(error => error.message).join(", ");
+                } else {
+                    status.innerHTML = "Oops! There was a problem submitting your form.";
+                }
+                status.style.color = "red";
+            });
+        }
+    }).catch(error => {
+        status.innerHTML = "Oops! There was a problem sending your message.";
+        status.style.color = "red";
+    });
+});
+</script>
+
+</body>
+</html>
